@@ -386,6 +386,21 @@ img{max-width:100%; display:block;}
 .next-cue svg{ width:22px; height:22px; animation:bounce 1.6s ease-in-out infinite; }
 .gate-hint{ margin-top:22px; font-size:.72rem; font-weight:500; letter-spacing:.26em; text-transform:uppercase; color:var(--ink-soft); }
 
+.rsvp-form{ display:flex; flex-direction:column; gap:14px; text-align:left; max-width:380px; margin:0 auto; }
+.rsvp-form input[type=text],.rsvp-form input[type=number],.rsvp-form textarea{
+  width:100%; font:inherit; font-size:1rem; color:var(--ink); background:var(--ivory);
+  border:1px solid rgba(143,177,206,.6); border-radius:8px; padding:13px 14px; outline:none; }
+.rsvp-form input:focus,.rsvp-form textarea:focus{ border-color:var(--blue-ink); box-shadow:0 0 0 3px rgba(127,163,196,.25); }
+.rsvp-choice{ display:flex; gap:10px; }
+.rsvp-choice label{ flex:1; cursor:pointer; }
+.rsvp-choice input{ position:absolute; opacity:0; pointer-events:none; }
+.rsvp-choice span{ display:block; text-align:center; font-size:.9rem; font-weight:500; padding:13px 8px; border:1px solid rgba(143,177,206,.6); border-radius:8px; color:var(--ink-soft); transition:all .3s var(--ease); }
+.rsvp-choice input:checked + span{ background:var(--blue-deep); border-color:var(--blue-deep); color:#fff; }
+.rsvp-choice input:focus-visible + span{ outline:2px solid var(--gold); outline-offset:2px; }
+.rsvp-form .map-btn{ align-self:center; justify-content:center; cursor:pointer; background:transparent; margin-top:6px; }
+.rsvp-form .map-btn:disabled{ opacity:.5; cursor:wait; }
+.rsvp-status{ text-align:center; font-size:.95rem; min-height:1.4em; color:var(--blue-ink); }
+.rsvp-status.err{ color:#a23b3b; }
 .rsvp-text{ font-size:1.05rem; line-height:1.8; color:var(--ink-soft); max-width:420px; margin:0 auto 32px; }
 
 /* ============ GALLERY ============ */
@@ -634,11 +649,18 @@ footer.site-footer{
       <div class="event-card">
         <div class="eyebrow">RSVP</div>
         <h2 class="serif">Kindly Respond</h2>
-        <p class="rsvp-text">Please let us know if you can join us by responding to <strong>Patricia &amp; Bibin</strong>.</p>
-        <!-- Replace the href below with the Google Sheet / Form link -->
-        <a class="map-btn" id="rsvpBtn" href="PASTE_GOOGLE_SHEET_LINK_HERE" target="_blank" rel="noopener">
-          RSVP Here
-        </a>
+        <p class="rsvp-text">Please let us know if you can join us. Your reply goes to <strong>Patricia &amp; Bibin</strong>.</p>
+        <form id="rsvpForm" class="rsvp-form" novalidate>
+          <input type="text" name="name" placeholder="Your name" required autocomplete="name">
+          <div class="rsvp-choice">
+            <label><input type="radio" name="attending" value="Joyfully accepts" required><span>Joyfully accepts</span></label>
+            <label><input type="radio" name="attending" value="Regretfully declines"><span>Regretfully declines</span></label>
+          </div>
+          <input type="number" name="guests" min="1" max="20" placeholder="Number of guests (including you)" inputmode="numeric">
+          <textarea name="message" rows="3" placeholder="A message for the couple (optional)"></textarea>
+          <button type="submit" class="map-btn" id="rsvpBtn">Send RSVP</button>
+          <p class="rsvp-status" id="rsvpStatus" role="status"></p>
+        </form>
       </div>
     </div>
     <a class="next-cue" href="#family" aria-label="Scroll down">Scroll down<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></a>
@@ -882,6 +904,25 @@ footer.site-footer{
       });
     });
   }
+})();
+</script>
+
+<script>
+// RSVP -> Google Apps Script web app (see rsvp-apps-script.gs). Paste the Web app URL here:
+var RSVP_ENDPOINT = "https://script.google.com/macros/s/AKfycbyJPLOO-16nhKSXQKNpofg_pSNWQs73HCcDIZfunvGxqrxFASmoZMZThlpx07prEMVV/exec";
+(function(){
+  var f=document.getElementById('rsvpForm'); if(!f) return;
+  var st=document.getElementById('rsvpStatus'), btn=document.getElementById('rsvpBtn');
+  f.addEventListener('submit',function(e){
+    e.preventDefault(); st.className='rsvp-status';
+    if(!f.name.value.trim()||!f.querySelector('input[name=attending]:checked')){ st.className='rsvp-status err'; st.textContent='Please enter your name and choose a response.'; return; }
+    if(RSVP_ENDPOINT.indexOf('PASTE_')===0){ st.className='rsvp-status err'; st.textContent='RSVP is not connected yet.'; return; }
+    btn.disabled=true; st.textContent='Sending…';
+    fetch(RSVP_ENDPOINT,{method:'POST',mode:'no-cors',body:new URLSearchParams(new FormData(f))})
+      .then(function(){ f.reset(); st.textContent='Thank you! Your RSVP has been received.'; })
+      .catch(function(){ st.className='rsvp-status err'; st.textContent='Could not send. Please try again.'; })
+      .then(function(){ btn.disabled=false; });
+  });
 })();
 </script>
 
