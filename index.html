@@ -365,7 +365,7 @@ img{max-width:100%; display:block;}
   display:grid; grid-template-columns:1fr; gap:56px; position:relative; z-index:2;
 }
 @media(min-width:760px){
-  .family-grid{ grid-template-columns:1fr auto 1fr; align-items:center; gap:40px; }
+  .family-grid{ grid-template-columns:1fr auto 1fr; align-items:start; gap:40px; }
 }
 .family-col{ text-align:center; }
 .family-col .rel{ font-size:.74rem; font-weight:500; letter-spacing:.26em; text-transform:uppercase; color:var(--blue-ink); margin-bottom:14px; }
@@ -373,8 +373,16 @@ img{max-width:100%; display:block;}
 .family-col .of{ font-size:.82rem; font-weight:500; letter-spacing:.1em; color:var(--ink-soft); text-transform:uppercase; margin-bottom:8px; }
 .family-col .parents{ font-family:'Cormorant Garamond', serif; font-style:italic; font-weight:500; font-size:1.35rem; color:var(--ink); line-height:1.55; }
 .family-col .addr{ margin-top:22px; font-size:.9rem; color:var(--ink-soft); line-height:1.75; letter-spacing:.01em; }
-.family-divider{ width:1px; height:120px; background:linear-gradient(var(--gold), transparent); margin:0 auto; opacity:.5; }
-@media(max-width:759px){ .family-divider{ width:60px; height:1px; background:linear-gradient(90deg,transparent,var(--gold),transparent); } }
+.family-col .pair{ display:block; }
+.family-col .pair .nm{ display:block; }
+.family-col .pair i{ color:var(--gold); font-style:italic; }
+.family-col .grands{ font-family:'Cormorant Garamond', serif; font-weight:500; font-size:1.2rem; line-height:1.5; color:var(--ink); }
+.family-col .grands .pair{ margin:2px 0; }
+.family-col .grands .and{ display:block; font-family:'Jost',sans-serif; font-size:.7rem; letter-spacing:.3em; text-transform:uppercase; color:var(--gold); margin:10px 0; }
+.family-col .parents .pair{ font-style:italic; }
+.family-col .addr strong{ font-weight:500; font-size:.72rem; letter-spacing:.24em; text-transform:uppercase; color:var(--blue-ink); }
+.family-divider{ align-self:stretch; width:1px; min-height:120px; background:linear-gradient(var(--gold), transparent); margin:0 auto; opacity:.5; }
+@media(max-width:759px){ .family-divider{ width:60px; height:1px; min-height:0; align-self:auto; background:linear-gradient(90deg,transparent,var(--gold),transparent); } }
 
 
 .next-cue{
@@ -557,46 +565,57 @@ footer.site-footer{
       <div class="hero-name n2 serif">Stefy</div>
       <div class="hero-date">13 November 2026</div>
     </div>
-    <a class="scroll-cue" href="#couple" aria-label="Scroll down for details">Scroll down for details<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></a>
+    <a class="scroll-cue" href="#gallery" aria-label="Scroll down for details">Scroll down for details<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></a>
   </section>
 
-  <!-- COUPLE -->
-  <section id="couple" class="section">
-    <svg class="corner-floral tl" viewBox="0 0 150 150"><use href="#sprig"/></svg>
-    <svg class="corner-floral br" viewBox="0 0 150 150"><use href="#sprig"/></svg>
+  <!-- GALLERY -->
+  <section id="gallery" class="section">
     <div class="section-inner">
-      <div class="eyebrow reveal">With Hearts Full Of Joy</div>
-      <div class="couple-photo reveal reveal-d1">
-        <img src="assets/couple.jpg" alt="Patrick and Stefy">
-        <div class="couple-photo-overlay">
-          <div class="tap-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M12 5v14M5 12l7 7 7-7"/>
-            </svg>
+      <div class="eyebrow reveal">Memories</div>
+      <h2 class="glimpse-title serif reveal reveal-d1">A Glimpse of Our Special Day</h2>
+      <div class="divider"></div>
+      <p class="glimpse-text reveal reveal-d1">We are delighted to share a few cherished moments from our wedding day with you. These photographs capture the love, laughter, blessings, and memories that made our Wedding Day celebration so special.</p>
+      <div class="gallery-grid single reveal reveal-d2">
+        <!-- To add more photos: drop them in assets/ and add more <figure><img ...></figure> blocks here, then remove the "single" class from the grid. -->
+        <figure class="gp"><img src="assets/couple.jpg" alt="Patrick and Stefy on their wedding day" loading="lazy"></figure>
+      </div>
+      <p class="glimpse-text reveal" style="margin-top:44px;">It brings us great joy to share these precious moments with our family and friends. We hope that as you look through these memories, you will experience a little of the happiness, warmth, and gratitude that filled our hearts on this blessed occasion.</p>
+      <p class="glimpse-thanks serif reveal">Thank you for being part of our journey and for sharing in our joy.</p>
+    </div>
+    <a class="next-cue" href="#family" aria-label="Scroll down">Scroll down<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></a>
+  </section>
+
+  <!-- FAMILY -->
+  <section id="family" class="section">
+    <div class="section-inner" style="max-width:900px;">
+      <div class="eyebrow reveal">With The Blessings Of</div>
+      <div class="family-grid" style="margin-top:50px;">
+        <div class="family-col reveal reveal-d1">
+          <div class="rel">The Groom</div>
+          <div class="who serif">Patrick Tom Chacko</div>
+          <div class="of">Grandson Of</div>
+          <div class="grands">
+            <span class="pair"><span class="nm">Late&nbsp;Mrs.&nbsp;Saramma&nbsp;Thomas</span><span class="nm"><i>&amp;</i> Mr.&nbsp;Thomas&nbsp;Pappan</span></span>
+            <span class="and">and</span>
+            <span class="pair"><span class="nm">Mrs.&nbsp;Elsy&nbsp;Chacko</span><span class="nm"><i>&amp;</i> Lt.Cdr.&nbsp;P.D.&nbsp;Chacko&nbsp;(Retd.)</span></span>
           </div>
-          <div class="tap-text">Tap to Reveal</div>
+          <div class="addr"><strong>Hosted by</strong><br>Dr. Shiny Chacko &amp; Mr. P.&nbsp;T.&nbsp;Chacko<br>1-5/22 Sector 16, Rohini<br>New Delhi – 110089</div>
+        </div>
+        <div class="family-divider reveal reveal-d2"></div>
+        <div class="family-col reveal reveal-d3">
+          <div class="rel">The Bride</div>
+          <div class="who serif">Dr. Stefy Varghese</div>
+          <div class="of">Daughter Of</div>
+          <div class="parents"><span class="pair"><span class="nm">Mrs.&nbsp;Daisy&nbsp;Varghese</span><span class="nm"><i>&amp;</i> Mr.&nbsp;Varghese&nbsp;T.K</span></span></div>
+          <div class="of" style="margin-top:22px;">Granddaughter Of</div>
+          <div class="grands">
+            <span class="pair"><span class="nm">Late&nbsp;Mrs.&nbsp;Mariamma&nbsp;Kuriakose</span><span class="nm"><i>&amp;</i> Late&nbsp;Mr.&nbsp;Kuriakose&nbsp;T.V</span></span>
+            <span class="and">and</span>
+            <span class="pair"><span class="nm">Mrs.&nbsp;Aleyamma&nbsp;John</span><span class="nm"><i>&amp;</i> Late&nbsp;Mr.&nbsp;John&nbsp;C.K</span></span>
+          </div>
+          <div class="addr"><strong>Residing at</strong><br>Thekkemuriyil House, Kodungoor<br>Vazhoor P.O., Kottayam District<br>Kerala – 686504</div>
         </div>
       </div>
-      <p class="lead reveal reveal-d2" style="margin-top:36px;">
-        Together with our families, we joyfully invite you to join us for an evening of
-        thanksgiving, fellowship, and celebration as we rejoice in God's abundant blessings
-        upon the post-wedding reception of our beloved children,
-      </p>
-      <div class="names-row reveal reveal-d3">
-        <div class="name-block">
-          <div class="role">The Groom</div>
-          <div class="name">Patrick Tom Chacko</div>
-        </div>
-        <div class="amp-mini">&amp;</div>
-        <div class="name-block">
-          <div class="role">The Bride</div>
-          <div class="name">Dr. Stefy Varghese</div>
-        </div>
-      </div>
-      <p class="lead reveal reveal-d3" style="margin-top:46px;">
-        Your presence, prayers, and blessings will make this occasion truly memorable as they
-        begin their new journey together in love and faith.
-      </p>
     </div>
     <a class="next-cue" href="#date" aria-label="Scroll down">Scroll down<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></a>
   </section>
@@ -662,50 +681,6 @@ footer.site-footer{
           <p class="rsvp-status" id="rsvpStatus" role="status"></p>
         </form>
       </div>
-    </div>
-    <a class="next-cue" href="#family" aria-label="Scroll down">Scroll down<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></a>
-  </section>
-
-  <!-- FAMILY -->
-  <section id="family" class="section">
-    <div class="section-inner" style="max-width:900px;">
-      <div class="eyebrow reveal">With The Blessings Of</div>
-      <div class="family-grid" style="margin-top:50px;">
-        <div class="family-col reveal reveal-d1">
-          <div class="rel">The Groom</div>
-          <div class="who serif">Patrick Tom Chacko</div>
-          <div class="of">Grandson Of</div>
-          <div class="parents">Late Mrs. Saramma Thomas &amp; Mr. Thomas Pappan<br>and<br>Mrs. Elsy Chacko &amp; Lt.Cdr. P.D. Chacko (Retd.)</div>
-          <div class="addr">Hosted by Dr. Shiny Chacko &amp; Mr. P. T. Chacko<br>1-5/22 Sector 16, Rohini, New Delhi – 110089</div>
-        </div>
-        <div class="family-divider reveal reveal-d2"></div>
-        <div class="family-col reveal reveal-d3">
-          <div class="rel">The Bride</div>
-          <div class="who serif">Dr. Stefy Varghese</div>
-          <div class="of">Daughter Of</div>
-          <div class="parents">Mrs. Daisy Varghese &amp; Mr. Varghese T.K</div>
-          <div class="of" style="margin-top:18px;">Granddaughter Of</div>
-          <div class="parents">Late Mrs. Mariamma Kuriakose &amp; Late Mr. Kuriakose T.V<br>and<br>Mrs. Aleyamma John &amp; Late Mr. John C.K</div>
-          <div class="addr">Thekkemuriyil House, Kodungoor, Vazhoor P.O.<br>Kottayam District, Kerala – 686504</div>
-        </div>
-      </div>
-    </div>
-    <a class="next-cue" href="#gallery" aria-label="Scroll down">Scroll down<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></a>
-  </section>
-
-  <!-- GALLERY -->
-  <section id="gallery" class="section">
-    <div class="section-inner">
-      <div class="eyebrow reveal">Memories</div>
-      <h2 class="glimpse-title serif reveal reveal-d1">A Glimpse of Our Special Day</h2>
-      <div class="divider"></div>
-      <p class="glimpse-text reveal reveal-d1">We are delighted to share a few cherished moments from our wedding day with you. These photographs capture the love, laughter, blessings, and memories that made our Wedding Day celebration so special.</p>
-      <div class="gallery-grid single reveal reveal-d2">
-        <!-- To add more photos: drop them in assets/ and add more <figure><img ...></figure> blocks here, then remove the "single" class from the grid. -->
-        <figure class="gp"><img src="assets/couple.jpg" alt="Patrick and Stefy on their wedding day" loading="lazy"></figure>
-      </div>
-      <p class="glimpse-text reveal" style="margin-top:44px;">It brings us great joy to share these precious moments with our family and friends. We hope that as you look through these memories, you will experience a little of the happiness, warmth, and gratitude that filled our hearts on this blessed occasion.</p>
-      <p class="glimpse-thanks serif reveal">Thank you for being part of our journey and for sharing in our joy.</p>
     </div>
     <a class="next-cue" href="#closing" aria-label="Scroll down">Scroll down<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></a>
   </section>
@@ -908,20 +883,25 @@ footer.site-footer{
 </script>
 
 <script>
-// RSVP -> Google Apps Script web app (see rsvp-apps-script.gs). Paste the Web app URL here:
-var RSVP_ENDPOINT = "https://script.google.com/macros/s/AKfycbyJPLOO-16nhKSXQKNpofg_pSNWQs73HCcDIZfunvGxqrxFASmoZMZThlpx07prEMVV/exec";
+// RSVP -> Google Apps Script web app (see rsvp-apps-script.gs)
+var RSVP_ENDPOINT = "https://script.google.com/macros/s/AKfycbxtFS0XF9wXjktlWIcvDruhKNgCqefGeYu0t9l5UFaBdcGzgbJ1tnaqa4WspeXeiDRu/exec";
 (function(){
   var f=document.getElementById('rsvpForm'); if(!f) return;
   var st=document.getElementById('rsvpStatus'), btn=document.getElementById('rsvpBtn');
+  // Native form POST into a hidden iframe: works reliably with Apps Script (no CORS issues).
+  var fr=document.createElement('iframe'); fr.name='rsvpFrame'; fr.style.display='none'; document.body.appendChild(fr);
+  f.action=RSVP_ENDPOINT; f.method='POST'; f.target='rsvpFrame';
+  var sent=false;
+  fr.addEventListener('load',function(){
+    if(!sent) return; sent=false;
+    f.reset(); btn.disabled=false; st.className='rsvp-status'; st.textContent='Thank you! Your RSVP has been received.';
+  });
   f.addEventListener('submit',function(e){
-    e.preventDefault(); st.className='rsvp-status';
-    if(!f.name.value.trim()||!f.querySelector('input[name=attending]:checked')){ st.className='rsvp-status err'; st.textContent='Please enter your name and choose a response.'; return; }
-    if(RSVP_ENDPOINT.indexOf('PASTE_')===0){ st.className='rsvp-status err'; st.textContent='RSVP is not connected yet.'; return; }
-    btn.disabled=true; st.textContent='Sending…';
-    fetch(RSVP_ENDPOINT,{method:'POST',mode:'no-cors',body:new URLSearchParams(new FormData(f))})
-      .then(function(){ f.reset(); st.textContent='Thank you! Your RSVP has been received.'; })
-      .catch(function(){ st.className='rsvp-status err'; st.textContent='Could not send. Please try again.'; })
-      .then(function(){ btn.disabled=false; });
+    st.className='rsvp-status';
+    if(!f.elements['name'].value.trim()||!f.querySelector('input[name=attending]:checked')){
+      e.preventDefault(); st.className='rsvp-status err'; st.textContent='Please enter your name and choose a response.'; return; }
+    sent=true; btn.disabled=true; st.textContent='Sending…';
+    setTimeout(function(){ if(sent){ sent=false; btn.disabled=false; st.className='rsvp-status'; st.textContent='Thank you! Your RSVP has been sent.'; } },8000);
   });
 })();
 </script>
