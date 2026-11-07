@@ -415,16 +415,17 @@ img{max-width:100%; display:block;}
 .album-item:focus-visible{ outline:2px solid var(--gold); outline-offset:3px; }
 .album-item img{ width:100%; height:100%; object-fit:cover; object-position:center 30%; display:block; }
 .album-hint{ margin-top:16px; font-size:.72rem; letter-spacing:.26em; text-transform:uppercase; color:var(--blue-ink); }
-.album-link{ display:inline-flex; margin-top:22px; }
-.album-link[hidden]{ display:none; }
+.album-open{ display:inline-flex; margin-top:22px; cursor:pointer; background:transparent; font:inherit; }
 .lb{ position:fixed; inset:0; z-index:9999; background:#0e141b; display:none; align-items:center; justify-content:center; touch-action:pan-y; }
 .lb.open{ display:flex; }
-.lb img{ max-width:100%; max-height:84vh; object-fit:contain; box-shadow:0 10px 50px rgba(0,0,0,.5); user-select:none; -webkit-user-drag:none; }
+.lb img{ max-width:100%; max-height:80vh; object-fit:contain; box-shadow:0 10px 50px rgba(0,0,0,.5); user-select:none; -webkit-user-drag:none; }
 .lb button{ position:absolute; background:rgba(255,255,255,.12); color:#fff; border:0; width:46px; height:46px; border-radius:50%; font-size:26px; line-height:1; cursor:pointer; display:flex; align-items:center; justify-content:center; }
 .lb button:hover{ background:rgba(255,255,255,.24); }
 .lb .lb-x{ top:max(14px,env(safe-area-inset-top)); right:14px; }
 .lb .lb-p{ left:10px; top:50%; transform:translateY(-50%); }
 .lb .lb-n{ right:10px; top:50%; transform:translateY(-50%); }
+.lb .lb-r{ position:absolute; top:max(26px,env(safe-area-inset-top)); left:16px; right:70px; color:#fff; font-size:.72rem; letter-spacing:.14em; opacity:.7; display:none; }
+@media (orientation:portrait){ .lb.wide .lb-r{ display:block; } }
 .lb .lb-c{ position:absolute; bottom:max(16px,env(safe-area-inset-bottom)); left:0; right:0; text-align:center; color:#fff; font-size:.78rem; letter-spacing:.3em; opacity:.85; }
 .rsvp-text{ font-size:1.05rem; line-height:1.8; color:var(--ink-soft); max-width:420px; margin:0 auto 32px; }
 
@@ -559,7 +560,6 @@ footer.site-footer{
     <div class="gate-names">Patrick &amp; Stefy</div>
     <div class="gate-sub">13 November 2026</div>
     <button class="enter-btn" id="enterBtn" type="button">Enter the Celebration</button>
-    <div class="gate-hint">Then scroll down for details</div>
   </div>
 </div>
 
@@ -597,7 +597,7 @@ footer.site-footer{
         <button type="button" class="album-item" data-i="1" aria-label="Open photo album"><img src="assets/photo2.jpg" alt="Patrick and Stefy on their wedding day" loading="lazy"></button>
       </div>
       <p class="album-hint reveal">Tap a photo to open the album</p>
-      <a class="map-btn album-link" id="albumLink" href="#" target="_blank" rel="noopener" hidden>View Full Album</a>
+      <button type="button" class="map-btn album-open reveal" id="albumOpen">View Full Album</button>
       <p class="glimpse-text reveal" style="margin-top:44px;">It brings us great joy to share these precious moments with our family and friends. We hope that as you look through these memories, you will experience a little of the happiness, warmth, and gratitude that filled our hearts on this blessed occasion.</p>
       <p class="glimpse-thanks serif reveal">Thank you for being part of our journey and for sharing in our joy.</p>
     </div>
@@ -931,24 +931,74 @@ var RSVP_ENDPOINT = "https://script.google.com/macros/s/AKfycbxtFS0XF9wXjktlWIcv
   <img id="lbImg" alt="">
   <button class="lb-n" id="lbN" aria-label="Next photo">&#8250;</button>
   <div class="lb-c" id="lbC"></div>
+  <div class="lb-r">Rotate your phone for a bigger view</div>
 </div>
 <script>
 // Photo album. To add more photos: drop files in assets/ and add them to ALBUM below
 // (also add a matching <button class="album-item"> in the Memories section if you want a thumbnail).
-// Optional: put a Google Photos / Drive album link in ALBUM_URL to show a "View Full Album" button.
 var ALBUM = [
   {src:"assets/couple.jpg", alt:"Patrick and Stefy walking down the aisle"},
-  {src:"assets/photo2.jpg", alt:"Patrick and Stefy on their wedding day"}
+  {src:"assets/photo2.jpg", alt:"Patrick and Stefy on their wedding day"},
+  {src:"assets/album/02.jpg", alt:"Wedding album page 2"},
+  {src:"assets/album/03.jpg", alt:"Wedding album page 3"},
+  {src:"assets/album/04.jpg", alt:"Wedding album page 4"},
+  {src:"assets/album/05.jpg", alt:"Wedding album page 5"},
+  {src:"assets/album/06.jpg", alt:"Wedding album page 6"},
+  {src:"assets/album/07.jpg", alt:"Wedding album page 7"},
+  {src:"assets/album/08.jpg", alt:"Wedding album page 8"},
+  {src:"assets/album/09.jpg", alt:"Wedding album page 9"},
+  {src:"assets/album/10.jpg", alt:"Wedding album page 10"},
+  {src:"assets/album/11.jpg", alt:"Wedding album page 11"},
+  {src:"assets/album/12.jpg", alt:"Wedding album page 12"},
+  {src:"assets/album/13.jpg", alt:"Wedding album page 13"},
+  {src:"assets/album/14.jpg", alt:"Wedding album page 14"},
+  {src:"assets/album/15.jpg", alt:"Wedding album page 15"},
+  {src:"assets/album/16.jpg", alt:"Wedding album page 16"},
+  {src:"assets/album/17.jpg", alt:"Wedding album page 17"},
+  {src:"assets/album/18.jpg", alt:"Wedding album page 18"},
+  {src:"assets/album/19.jpg", alt:"Wedding album page 19"},
+  {src:"assets/album/20.jpg", alt:"Wedding album page 20"},
+  {src:"assets/album/21.jpg", alt:"Wedding album page 21"},
+  {src:"assets/album/22.jpg", alt:"Wedding album page 22"},
+  {src:"assets/album/23.jpg", alt:"Wedding album page 23"},
+  {src:"assets/album/24.jpg", alt:"Wedding album page 24"},
+  {src:"assets/album/25.jpg", alt:"Wedding album page 25"},
+  {src:"assets/album/26.jpg", alt:"Wedding album page 26"},
+  {src:"assets/album/27.jpg", alt:"Wedding album page 27"},
+  {src:"assets/album/28.jpg", alt:"Wedding album page 28"},
+  {src:"assets/album/29.jpg", alt:"Wedding album page 29"},
+  {src:"assets/album/30.jpg", alt:"Wedding album page 30"},
+  {src:"assets/album/31.jpg", alt:"Wedding album page 31"},
+  {src:"assets/album/32.jpg", alt:"Wedding album page 32"},
+  {src:"assets/album/33.jpg", alt:"Wedding album page 33"},
+  {src:"assets/album/34.jpg", alt:"Wedding album page 34"},
+  {src:"assets/album/35.jpg", alt:"Wedding album page 35"},
+  {src:"assets/album/36.jpg", alt:"Wedding album page 36"},
+  {src:"assets/album/37.jpg", alt:"Wedding album page 37"},
+  {src:"assets/album/38.jpg", alt:"Wedding album page 38"},
+  {src:"assets/album/39.jpg", alt:"Wedding album page 39"},
+  {src:"assets/album/40.jpg", alt:"Wedding album page 40"},
+  {src:"assets/album/41.jpg", alt:"Wedding album page 41"},
+  {src:"assets/album/42.jpg", alt:"Wedding album page 42"},
+  {src:"assets/album/43.jpg", alt:"Wedding album page 43"},
+  {src:"assets/album/44.jpg", alt:"Wedding album page 44"},
+  {src:"assets/album/45.jpg", alt:"Wedding album page 45"},
+  {src:"assets/album/46.jpg", alt:"Wedding album page 46"},
+  {src:"assets/album/47.jpg", alt:"Wedding album page 47"},
+  {src:"assets/album/48.jpg", alt:"Wedding album page 48"},
+  {src:"assets/album/49.jpg", alt:"Wedding album page 49"},
+  {src:"assets/album/50.jpg", alt:"Wedding album page 50"}
 ];
-var ALBUM_URL = "";
 (function(){
   var lb=document.getElementById('lb'), img=document.getElementById('lbImg'), c=document.getElementById('lbC'), i=0;
-  if(ALBUM_URL){ var a=document.getElementById('albumLink'); a.href=ALBUM_URL; a.hidden=false; }
-  function show(n){ i=(n+ALBUM.length)%ALBUM.length; img.src=ALBUM[i].src; img.alt=ALBUM[i].alt; c.textContent=(i+1)+' / '+ALBUM.length; }
+  function show(n){ i=(n+ALBUM.length)%ALBUM.length; img.src=ALBUM[i].src; img.alt=ALBUM[i].alt; c.textContent=(i+1)+' / '+ALBUM.length;
+    [i+1,i-1].forEach(function(k){ var p=new Image(); p.src=ALBUM[(k+ALBUM.length)%ALBUM.length].src; }); }
+  img.addEventListener('load',function(){ lb.classList.toggle('wide', img.naturalWidth>img.naturalHeight); });
   function open(n){ show(n); lb.classList.add('open'); document.body.style.overflow='hidden'; }
   function close(){ lb.classList.remove('open'); document.body.style.overflow=''; }
   document.querySelectorAll('.album-item').forEach(function(b){ b.addEventListener('click',function(){ open(+b.dataset.i); }); });
   document.getElementById('lbX').onclick=close;
+  document.getElementById('albumOpen').onclick=function(){ open(2); };
   document.getElementById('lbP').onclick=function(){ show(i-1); };
   document.getElementById('lbN').onclick=function(){ show(i+1); };
   lb.addEventListener('click',function(e){ if(e.target===lb) close(); });
