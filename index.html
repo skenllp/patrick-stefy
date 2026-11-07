@@ -376,9 +376,21 @@ img{max-width:100%; display:block;}
 .family-divider{ width:1px; height:120px; background:linear-gradient(var(--gold), transparent); margin:0 auto; opacity:.5; }
 @media(max-width:759px){ .family-divider{ width:60px; height:1px; background:linear-gradient(90deg,transparent,var(--gold),transparent); } }
 
+
+.next-cue{
+  position:absolute; bottom:26px; left:50%; transform:translateX(-50%); z-index:3;
+  display:flex; flex-direction:column; align-items:center; gap:2px; text-decoration:none;
+  font-size:.7rem; font-weight:500; letter-spacing:.3em; text-transform:uppercase; white-space:nowrap;
+  color:var(--blue-ink); opacity:.85;
+}
+.next-cue svg{ width:22px; height:22px; animation:bounce 1.6s ease-in-out infinite; }
+.gate-hint{ margin-top:22px; font-size:.72rem; font-weight:500; letter-spacing:.26em; text-transform:uppercase; color:var(--ink-soft); }
+
+.rsvp-text{ font-size:1.05rem; line-height:1.8; color:var(--ink-soft); max-width:420px; margin:0 auto 32px; }
+
 /* ============ GALLERY ============ */
 #gallery{ background:var(--white); padding-left:0; padding-right:0; }
-#gallery .section-inner{ max-width:1000px; text-align:center; }
+#gallery .section-inner{ max-width:1000px; text-align:center; padding:0 24px; }
 .gallery-grid{
   display:grid; grid-template-columns:1fr; gap:14px; margin-top:44px;
 }
@@ -392,6 +404,13 @@ img{max-width:100%; display:block;}
 .g1{ aspect-ratio:4/5; }
 .g2{ aspect-ratio:16/9; }
 .g3{ aspect-ratio:16/9; }
+
+
+.glimpse-title{ font-weight:500; font-size:clamp(2rem,6vw,2.8rem); color:var(--ink); margin-top:10px; line-height:1.2; }
+.glimpse-text{ font-size:1.02rem; line-height:1.85; color:var(--ink-soft); max-width:560px; margin:0 auto; }
+.glimpse-thanks{ font-style:italic; font-weight:500; font-size:clamp(1.4rem,4.4vw,1.8rem); color:var(--ink); margin-top:34px; line-height:1.6; }
+.gallery-grid.single{ grid-template-columns:1fr; max-width:420px; margin-left:auto; margin-right:auto; }
+.gallery-grid.single figure{ aspect-ratio:718/914; border:8px solid var(--white); outline:1px solid rgba(184,148,90,.3); box-shadow:0 12px 48px rgba(79,105,130,.2); }
 
 /* ============ CLOSING ============ */
 #closing{
@@ -500,6 +519,7 @@ footer.site-footer{
     <div class="gate-names">Patrick &amp; Stefy</div>
     <div class="gate-sub">13 November 2026</div>
     <button class="enter-btn" id="enterBtn" type="button">Enter the Celebration</button>
+    <div class="gate-hint">Then scroll down for details</div>
   </div>
 </div>
 
@@ -545,7 +565,7 @@ footer.site-footer{
       <p class="lead reveal reveal-d2" style="margin-top:36px;">
         Together with our families, we joyfully invite you to join us for an evening of
         thanksgiving, fellowship, and celebration as we rejoice in God's abundant blessings
-        upon the marriage of our beloved children,
+        upon the post-wedding reception of our beloved children,
       </p>
       <div class="names-row reveal reveal-d3">
         <div class="name-block">
@@ -563,6 +583,7 @@ footer.site-footer{
         begin their new journey together in love and faith.
       </p>
     </div>
+    <a class="next-cue" href="#date" aria-label="Scroll down">Scroll down<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></a>
   </section>
 
   <!-- DATE -->
@@ -578,6 +599,7 @@ footer.site-footer{
         <p class="note">Friday &nbsp;·&nbsp; 6:00 – 9:00 PM<br>We can't wait to celebrate with you.</p>
       </div>
     </div>
+    <a class="next-cue" href="#ceremony" aria-label="Scroll down">Scroll down<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></a>
   </section>
 
   <!-- CELEBRATION -->
@@ -601,6 +623,25 @@ footer.site-footer{
         </a>
       </div>
     </div>
+    <a class="next-cue" href="#rsvp" aria-label="Scroll down">Scroll down<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></a>
+  </section>
+
+  <!-- RSVP -->
+  <section id="rsvp" class="event-section alt section">
+    <svg class="corner-floral bl" viewBox="0 0 150 150"><use href="#sprig"/></svg>
+    <svg class="corner-floral br" viewBox="0 0 150 150"><use href="#sprig"/></svg>
+    <div class="section-inner reveal">
+      <div class="event-card">
+        <div class="eyebrow">RSVP</div>
+        <h2 class="serif">Kindly Respond</h2>
+        <p class="rsvp-text">Please let us know if you can join us by responding to <strong>Patricia &amp; Bibin</strong>.</p>
+        <!-- Replace the href below with the Google Sheet / Form link -->
+        <a class="map-btn" id="rsvpBtn" href="PASTE_GOOGLE_SHEET_LINK_HERE" target="_blank" rel="noopener">
+          RSVP Here
+        </a>
+      </div>
+    </div>
+    <a class="next-cue" href="#family" aria-label="Scroll down">Scroll down<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></a>
   </section>
 
   <!-- FAMILY -->
@@ -627,9 +668,25 @@ footer.site-footer{
         </div>
       </div>
     </div>
+    <a class="next-cue" href="#gallery" aria-label="Scroll down">Scroll down<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></a>
   </section>
 
-  <!-- GALLERY (disabled — "A Glimpse Of The Day" section removed per request) -->
+  <!-- GALLERY -->
+  <section id="gallery" class="section">
+    <div class="section-inner">
+      <div class="eyebrow reveal">Memories</div>
+      <h2 class="glimpse-title serif reveal reveal-d1">A Glimpse of Our Special Day</h2>
+      <div class="divider"></div>
+      <p class="glimpse-text reveal reveal-d1">We are delighted to share a few cherished moments from our wedding day with you. These photographs capture the love, laughter, blessings, and memories that made our Wedding Day celebration so special.</p>
+      <div class="gallery-grid single reveal reveal-d2">
+        <!-- To add more photos: drop them in assets/ and add more <figure><img ...></figure> blocks here, then remove the "single" class from the grid. -->
+        <figure class="gp"><img src="assets/couple.jpg" alt="Patrick and Stefy on their wedding day" loading="lazy"></figure>
+      </div>
+      <p class="glimpse-text reveal" style="margin-top:44px;">It brings us great joy to share these precious moments with our family and friends. We hope that as you look through these memories, you will experience a little of the happiness, warmth, and gratitude that filled our hearts on this blessed occasion.</p>
+      <p class="glimpse-thanks serif reveal">Thank you for being part of our journey and for sharing in our joy.</p>
+    </div>
+    <a class="next-cue" href="#closing" aria-label="Scroll down">Scroll down<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></a>
+  </section>
 
   <!-- CLOSING -->
   <section id="closing">
